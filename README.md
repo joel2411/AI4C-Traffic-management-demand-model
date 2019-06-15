@@ -1,5 +1,5 @@
 # AI4C Traffic-management-demand-model
-This repository contains the [python programs](AI4C) to generate and test the demand model to solve Grab's AIforSEA traffic management challenge.
+This repository contains the [python programs](AI4C) for building and testing the demand model to solve Grab's AIforSEA traffic management challenge.
 
 ## Data analysis and design of the programs
 The description about the design of the programs, analysis on the data, detail of the forecasting model, and discussions about the data and the programs can be found in:
