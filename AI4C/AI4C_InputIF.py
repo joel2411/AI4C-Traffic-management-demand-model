@@ -95,13 +95,14 @@ def fill_features(wd, ts, q_max, ftr_sz, quarterly_p, dc_quarterly_p):
     return np_lookup
 
 
-def elaborate_input(raw_input):
+def elaborate_input(raw_input, raw):
     """
     :param raw_input: numpy array containing:
          geo: geohash6 information
          day: day information
          timestamp: timestamp information
          demand: demand information
+    :param ras: boolean to indicate whether the data is raw or not
     :return: input data suitable for the forecasting model
     """
     # Initialize the absolute time to be used for converting
@@ -138,10 +139,15 @@ def elaborate_input(raw_input):
         day = raw_input[r][1]
         timestamp = raw_input[r][2]
         demand = raw_input[r][3]
-        # Translate time data into integer-based data.
-        ts = ((pd.to_datetime(timestamp, format='%H:%M') -
-               abs_time) // 15).to_timedelta64(). \
-            astype('timedelta64[m]').astype(int)
+        # in case the data is the same as in original training data.
+        if raw:
+            # Translate time data into integer-based data.
+            ts = ((pd.to_datetime(timestamp, format='%H:%M') -
+                   abs_time) // 15).to_timedelta64(). \
+                astype('timedelta64[m]').astype(int)
+        # in case the timestamp is already in integer form.
+        else:
+            ts = raw_input[r][2]
         # Obtain the weekday data.
         # If the day in the input data start from 1, shift the day by -1
         # because the day used in location profile data start from 0.
