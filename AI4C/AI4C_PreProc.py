@@ -47,6 +47,15 @@ print("Pre-process time data")
 tr_df['timestamp'] = ((pd.to_datetime(tr_df['timestamp'], format='%H:%M') -
                        abs_time) // 15).astype('timedelta64[m]').astype(int)
 
+
+# Set number of days considered in building the profile
+num_day = 61
+# Update training data consider only the demands in the last num_day
+max_day = tr_df['day'].max()
+if max_day - num_day >= 0:
+    tr_df = tr_df.loc[tr_df['day'] > max_day - num_day]
+    tr_df['day'] -= max_day - num_day
+
 # Create a dataframe to store geo-location data information which include
 # the geohash6 as the key, and latitude and longitude information.
 # At the moment, this data is not used, since the location has been nicely
@@ -91,8 +100,6 @@ tr_df['time'] = ((tr_df['day'] - 1) * (4 * 24) +
 # Generate a full list of unique time-key and its respective day and timestamp
 # with timestamp already in integer form
 print("Pre-process time list full")
-# Set number of days considered in building the profile
-num_day = 61
 temp_time = np.arange(0, num_day * 96)
 temp_hhmm = ['' for x in range(num_day * 96)]
 for x in list(zip(temp_time)):
