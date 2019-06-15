@@ -18,8 +18,8 @@ This program aims to achieve the following:
 The input files for this program are:
 - geo_set.csv: list of unique location represented by the geohash6, latitude
                and longitude
-- training.csv: training data containing geohash6, demand, day and timestamp 
-                data.
+- prefinal_training.csv: training data containing geohash6, demand, day and 
+                         timestamp data and target demand data.
 - quarterly_profile.csv: the profile data for each location as the mean and
                          standard deviation of the demand, and the number of 
                          non-zero demand at each weekday and time.
@@ -53,6 +53,14 @@ print("Load pre-final training data")
 tr_df = pd.read_csv(cwd + '/Traffic data/prefinal_training.csv',
                     sep=',',
                     index_col=0)
+
+# Set number of days considered in training the NN
+num_day = 61
+# Update training data consider only the demands in the last num_day
+max_day = tr_df['day'].max()
+if max_day - num_day >= 0:
+    tr_df = tr_df.loc[tr_df['day'] > max_day - num_day]
+    tr_df['day'] -= max_day - num_day
 
 # Load demand characteristics and demand change characteristic data.
 print("Load demand characteristic data")
