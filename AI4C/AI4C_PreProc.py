@@ -91,8 +91,10 @@ tr_df['time'] = ((tr_df['day'] - 1) * (4 * 24) +
 # Generate a full list of unique time-key and its respective day and timestamp
 # with timestamp already in integer form
 print("Pre-process time list full")
-temp_time = np.arange(0, 5856)
-temp_hhmm = ['' for x in range(5856)]
+# Set number of days considered in building the profile
+num_day = 61
+temp_time = np.arange(0, num_day * 96)
+temp_hhmm = ['' for x in range(num_day * 96)]
 for x in list(zip(temp_time)):
     temp_hhmm[x[0]] = str(((x[0]) // 4) % 24) + ':' + str((x[0] % 4) * 15)
 
