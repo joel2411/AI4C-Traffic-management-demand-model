@@ -80,7 +80,7 @@ model_preds = model.predict([q_input,
 # Store the prediction results.
 complete_preds = model_preds
 
-# Predict the future demand larger than the next 15 minutes
+# Predict the future demand further than the next 15 minutes
 for t in range(T_length - 1):
     # update time information.
     x_ts += 1
@@ -110,6 +110,6 @@ for t in range(T_length - 1):
 
 # Show prediction results.
 # columns represent T + column index.
-# rows represent a prediction at a location and time.
+# rows represent the predictions at a location and time.
 for pred in complete_preds:
     print(pred)
