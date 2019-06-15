@@ -5,7 +5,7 @@ This repository contains the python programs to generate the demand model to sol
 Description regarding the design of the programs, analysis on the supporting data, intuitions behind the inner working of the programs, detail of the forecasting model, and discussions about the data and the programs can be found in:
 - AI4C_DataAnalysis.pdf
 
-## Instructions on programs usage
+## Instructions about the programs usage
 Information about the function of each programs and programs' requirements, and instructions about how to use the programs can be found in:
 - AI4C_ProgramInformation.pdf
 
